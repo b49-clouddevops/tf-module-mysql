@@ -1,5 +1,5 @@
 # Creating RDS Instance, a managed service for sequel db
-resource "aws_db_instance" "mysqldb" {
+resource "aws_db_instance" "mysqld" {
   identifier           = "roboshop-${var.ENV}"  
   allocated_storage    = 10
   engine               = "mysql"
@@ -7,22 +7,22 @@ resource "aws_db_instance" "mysqldb" {
   instance_class       = "db.t3.micro"
   username             = "admin1"
   password             = "RoboShop1"
-  parameter_group_name = aws_db_parameter_group.mysqldb.name
+  parameter_group_name = aws_db_parameter_group.mysqld.name
   skip_final_snapshot  = true
-  db_subnet_group_name = aws_db_subnet_group.mysqldb.name 
-  vpc_security_group_ids = [aws_security_group.allow_mysqldb.id]
+  db_subnet_group_name = aws_db_subnet_group.mysqld.name 
+  vpc_security_group_ids = [aws_security_group.allow_mysqld.id]
 
 }
 
 
 # # Creating the patameter group
-resource "aws_db_parameter_group" "mysqldb" {
+resource "aws_db_parameter_group" "mysqld" {
   name   = "roboshop-${var.ENV}"
   family = "mysql5.7"
 }
 
 # Creating Subnet Grou
-resource "aws_db_subnet_group" "mysqldb" {
+resource "aws_db_subnet_group" "mysqld" {
   name       = "mysql"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
   tags = {
@@ -31,9 +31,9 @@ resource "aws_db_subnet_group" "mysqldb" {
 }
 
 # SG for MySQL
-resource "aws_security_group" "allow_mysqldb" {
-  name        = "roboshop-mysqldb-${var.ENV}"
-  description = "roboshop-mysqldb-${var.ENV}"
+resource "aws_security_group" "allow_mysqld" {
+  name        = "roboshop-mysqld-${var.ENV}"
+  description = "roboshop-mysqld-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
@@ -53,7 +53,7 @@ resource "aws_security_group" "allow_mysqldb" {
   }
 
   tags = {
-    Name = "roboshop-mysqldb-${var.ENV}"
+    Name = "roboshop-mysqld-${var.ENV}"
   }
 }
 
