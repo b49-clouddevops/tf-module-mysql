@@ -1,5 +1,5 @@
 # Injecting the Schema
-resource "null_resource" "schema" {
+resource "null_resource" "mysql-schema" {
   provisioner "local-exec" {
     command = <<EOF
     cd /tmp 
