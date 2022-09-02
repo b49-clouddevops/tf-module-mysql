@@ -42,7 +42,7 @@ resource "aws_security_group" "allow_mysql" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, var.WORKSPATION_IP]
   }
 
   egress {
@@ -57,3 +57,4 @@ resource "aws_security_group" "allow_mysql" {
     Name = "roboshop-mysql-${var.ENV}"
   }
 }
+
