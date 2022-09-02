@@ -1,6 +1,6 @@
 # Creating RDS Instance, a managed service for sequel db
 resource "aws_db_instance" "mysql" {
-  identifiter  
+  identifier           = "roboshop-${var.ENV}"  
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
@@ -11,6 +11,7 @@ resource "aws_db_instance" "mysql" {
   parameter_group_name = aws_db_parameter_group.mysql.name
   skip_final_snapshot  = true
   db_subnet_group_name = aws_db_subnet_group.mysql.name 
+  vpc_security_group_ids = [aws_]
 
 }
 
