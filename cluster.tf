@@ -41,9 +41,6 @@ resource "aws_security_group" "allow_mysql" {
   name        = "roboshop-mysql-${var.ENV}"
   description = "roboshop-mysql-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
-  depends_on = [
-     aws_db_instance.mysql
-  ]
 
   ingress {
     description = "TLS from VPC"
