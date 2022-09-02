@@ -33,8 +33,8 @@ resource "aws_db_subnet_group" "mysql" {
 
 # SG for MySQL
 resource "aws_security_group" "allow_mysqldb" {
-  name        = "roboshop-mysql-${var.ENV}"
-  description = "roboshop-mysql-${var.ENV}"
+  name        = "roboshop-mysqldb-${var.ENV}"
+  description = "roboshop-mysqldb-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
@@ -54,7 +54,7 @@ resource "aws_security_group" "allow_mysqldb" {
   }
 
   tags = {
-    Name = "roboshop-mysql-${var.ENV}"
+    Name = "roboshop-mysqldb-${var.ENV}"
   }
 }
 
