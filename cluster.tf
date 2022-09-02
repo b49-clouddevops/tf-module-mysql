@@ -30,7 +30,7 @@ resource "aws_db_subnet_group" "mysql-db" {
   }
 }
 
-# SG for MySQL-DB
+# SG for MySQL-Database
 resource "aws_security_group" "allow_mysql-db" {
   name        = "roboshop-mysql-db-${var.ENV}"
   description = "roboshop-mysql-db-${var.ENV}"
