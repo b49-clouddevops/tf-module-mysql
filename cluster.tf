@@ -17,13 +17,13 @@ resource "aws_db_instance" "mysqld" {
 
 # # Creating the patameter group
 resource "aws_db_parameter_group" "mysqld" {
-  name   = "roboshop-${var.ENV}"
+  name   = "roboshop-mysqld-${var.ENV}"
   family = "mysql5.7"
 }
 
 # Creating Subnet Grou
 resource "aws_db_subnet_group" "mysqld" {
-  name       = "mysql"
+  name       = "mysqld"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
   tags = {
     Name = "roboshop-${var.ENV}"
