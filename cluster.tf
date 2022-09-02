@@ -9,6 +9,7 @@ resource "aws_db_instance" "mysql" {
   password             = "RoboShop1"
   parameter_group_name = aws_db_parameter_group.mysql.name
   skip_final_snapshot  = true
+  db_subnet_group_name = aws_db_subnet_group.mysql.name 
 
 }
 
