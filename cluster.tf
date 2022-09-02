@@ -1,5 +1,6 @@
 # Creating RDS Instance, a managed service for sequel db
 resource "aws_db_instance" "mysql" {
+  identifiter  
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
