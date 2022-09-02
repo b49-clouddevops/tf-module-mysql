@@ -1,6 +1,6 @@
 # Creating RDS Instance, a managed service for sequel db
 resource "aws_db_instance" "mysql" {
-  identifier           = "roboshop-${var.ENV}"  
+  identifier           = "roboshop-mysql-${var.ENV}"  
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
