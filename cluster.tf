@@ -1,5 +1,5 @@
 # Creating RDS Instance, a managed service for sequel db
-resource "aws_db_instance" "mysql" {
+resource "aws_db_instance" "mysqldb" {
   identifier           = "roboshop-${var.ENV}"  
   allocated_storage    = 10
   engine               = "mysql"
@@ -8,22 +8,22 @@ resource "aws_db_instance" "mysql" {
   name                 = "dummy"
   username             = "admin1"
   password             = "RoboShop1"
-  parameter_group_name = aws_db_parameter_group.mysql.name
+  parameter_group_name = aws_db_parameter_group.mysqldb.name
   skip_final_snapshot  = true
-  db_subnet_group_name = aws_db_subnet_group.mysql.name 
-  vpc_security_group_ids = [aws_security_group.allow_mysqdb.id]
+  db_subnet_group_name = aws_db_subnet_group.mysqldb.name 
+  vpc_security_group_ids = [aws_security_group.allow_mysqldb.id]
 
 }
 
 
 # # Creating the patameter group
-resource "aws_db_parameter_group" "mysql" {
+resource "aws_db_parameter_group" "mysqldb" {
   name   = "roboshop-${var.ENV}"
   family = "mysql5.7"
 }
 
 # Creating Subnet Grou
-resource "aws_db_subnet_group" "mysql" {
+resource "aws_db_subnet_group" "mysqldb" {
   name       = "mysql"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
   tags = {
