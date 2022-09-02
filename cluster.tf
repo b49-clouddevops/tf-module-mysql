@@ -19,6 +19,9 @@ resource "aws_db_instance" "mysql" {
 resource "aws_db_parameter_group" "mysql" {
   name   = "roboshop-mysql-${var.ENV}"
   family = "mysql5.7"
+  depends_on = [
+     aws_db_instance.mysql
+  ]
 }
 
 # Creating Subnet Grou
