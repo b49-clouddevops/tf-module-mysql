@@ -28,7 +28,7 @@ resource "aws_db_subnet_group" "mysql" {
   }
 }
 
-# SG for redis
+# SG for MySQL
 resource "aws_security_group" "allow_redis" {
   name        = "roboshop-redisb-${var.ENV}"
   description = "roboshop-redis-${var.ENV}"
