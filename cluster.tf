@@ -12,6 +12,21 @@ resource "aws_db_instance" "mysql" {
 }
 
 
+# # Creating the patameter group
+resource "aws_db_parameter_group" "mysql" {
+  name   = "rds-pg"
+  family = "mysql5.6"
+
+  parameter {
+    name  = "character_set_server"
+    value = "utf8"
+  }
+
+  parameter {
+    name  = "character_set_client"
+    value = "utf8"
+  }
+}
 
 # # Creating Elasticcache : A Managed service for Redis
 # resource "aws_elasticache_cluster" "redis" {
