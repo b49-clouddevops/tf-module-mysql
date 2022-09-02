@@ -1,5 +1,7 @@
 # Injecting the Schema
 resource "null_resource" "mysql-schema" {
+  
+  depends_on  =  []
   provisioner "local-exec" {
     command = <<EOF
     cd /tmp 
@@ -11,4 +13,5 @@ resource "null_resource" "mysql-schema" {
 EOF
 
   }
+
 }
