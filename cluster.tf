@@ -7,24 +7,24 @@ resource "aws_db_instance" "mysql" {
   name                 = "dummy"
   username             = "admin1"
   password             = "RoboShop1"
-  parameter_group_name = "default.mysql5.7"
+  parameter_group_name = aws_db_parameter_group.mysql.name
   skip_final_snapshot  = true
+
 }
 
 
 # # Creating the patameter group
 resource "aws_db_parameter_group" "mysql" {
-  name   = "rds-pg"
-  family = "mysql5.6"
+  name   = "roboshop-${var.ENV}"
+  family = "mysql5.7"
+}
 
-  parameter {
-    name  = "character_set_server"
-    value = "utf8"
-  }
+resource "aws_db_subnet_group" "default" {
+  name       = "main"
+  subnet_ids = [aws_subnet.frontend.id, aws_subnet.backend.id]
 
-  parameter {
-    name  = "character_set_client"
-    value = "utf8"
+  tags = {
+    Name = "My DB subnet group"
   }
 }
 
