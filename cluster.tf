@@ -54,6 +54,6 @@ resource "aws_security_group" "allow_mysql" {
   }
 
   tags = {
-    Name = "roboshop-mongodb-${var.ENV}"
+    Name = "roboshop-mysql-${var.ENV}"
   }
 }
