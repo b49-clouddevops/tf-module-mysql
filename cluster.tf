@@ -1,32 +1,47 @@
-# Creating Elasticcache : A Managed service for Redis
-resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "roboshop-${var.ENV}"
-  engine               = "redis"
-  node_type            = "cache.t3.small"
-  num_cache_nodes      = 1
-  parameter_group_name = aws_elasticache_parameter_group.default.name
-  engine_version       = "6.x"
-  port                 = 6379
-  subnet_group_name    = aws_elasticache_subnet_group.subnet-group.name
-  security_group_ids   = [aws_security_group.allow_redis.id]
+# Creating RDS Instance, a managed service for sequel db
+resource "aws_db_instance" "default" {
+  allocated_storage    = 10
+  engine               = "mysql"
+  engine_version       = "5.7"
+  instance_class       = "db.t3.micro"
+  name                 = "mydb"
+  username             = "foo"
+  password             = "foobarbaz"
+  parameter_group_name = "default.mysql5.7"
+  skip_final_snapshot  = true
 }
 
 
-# Creating the patameter group
-resource "aws_elasticache_parameter_group" "default" {
-  name   = "roboshop-${var.ENV}"
-  family = "redis6.x"
-}
 
-# Creating Subnet Grouo 
-resource "aws_elasticache_subnet_group" "subnet-group" {
-  name       = "roboshop-${var.ENV}"
-  subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
+# # Creating Elasticcache : A Managed service for Redis
+# resource "aws_elasticache_cluster" "redis" {
+#   cluster_id           = "roboshop-${var.ENV}"
+#   engine               = "redis"
+#   node_type            = "cache.t3.small"
+#   num_cache_nodes      = 1
+#   parameter_group_name = aws_elasticache_parameter_group.default.name
+#   engine_version       = "6.x"
+#   port                 = 6379
+#   subnet_group_name    = aws_elasticache_subnet_group.subnet-group.name
+#   security_group_ids   = [aws_security_group.allow_redis.id]
+# }
 
-  tags = {
-    Name = "roboshop-${var.ENV}"
-  }
-}
+
+# # Creating the patameter group
+# resource "aws_elasticache_parameter_group" "default" {
+#   name   = "roboshop-${var.ENV}"
+#   family = "redis6.x"
+# }
+
+# # Creating Subnet Grouo 
+# resource "aws_elasticache_subnet_group" "subnet-group" {
+#   name       = "roboshop-${var.ENV}"
+#   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
+
+#   tags = {
+#     Name = "roboshop-${var.ENV}"
+#   }
+# }
 
 
 # SG for redis
