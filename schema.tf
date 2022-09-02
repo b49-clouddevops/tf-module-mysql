@@ -11,7 +11,5 @@ resource "null_resource" "mysql-schema" {
     mysql -h ${aws_db_instance.mysql.address}  -uadmin1 -pRoboShop1 <shipping.sql
 
 EOF
-
   }
-
 }
