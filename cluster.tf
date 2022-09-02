@@ -29,15 +29,15 @@ resource "aws_db_subnet_group" "mysql" {
 }
 
 # SG for MySQL
-resource "aws_security_group" "allow_redis" {
-  name        = "roboshop-redisb-${var.ENV}"
-  description = "roboshop-redis-${var.ENV}"
+resource "aws_security_group" "allow_mysql" {
+  name        = "roboshop-mysql-${var.ENV}"
+  description = "roboshop-mysql-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
     description = "TLS from VPC"
-    from_port   = 6379
-    to_port     = 6379
+    from_port   = 3306
+    to_port     = 3306
     protocol    = "tcp"
     cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
   }
