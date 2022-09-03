@@ -13,8 +13,6 @@ resource "aws_db_instance" "mysql" {
   vpc_security_group_ids = [aws_security_group.allow_mysql.id]
   depends_on            = [aws_security_group.allow_mysql]
     
-  ]
-
 }
 
 
