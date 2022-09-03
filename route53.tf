@@ -4,5 +4,5 @@ resource "aws_route53_record" "mysql-record" {
   name    = "mysql-${var.ENV}.${data.terraform_remote_state.vpc.outputs.HOSTEDZONE_PRIVATE_ZONE}"
   type    = "CNAME"
   ttl     = 660
-  records = [aws_docdb_cluster.main.endpoint]
+  records = [aws_db_instance.mysql.address]
 }
