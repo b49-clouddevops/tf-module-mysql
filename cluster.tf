@@ -5,7 +5,8 @@ resource "aws_db_instance" "mysql" {
   engine               = "mysql"
   engine_version       =  var.RDS_ENGINE_VERSION
   instance_class       = var.RDS_INDTSNCE_TYPE
-  username             = "admin1" MYSQL_USERNAME
+  username             = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["MYSQL_USERNAME"]
+  username             = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["MYSQL_PASSWORD"]
   password             = "RoboShop1" MYSQL_USERNAME
   parameter_group_name = aws_db_parameter_group.mysql.name
   skip_final_snapshot  = true
