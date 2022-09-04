@@ -18,7 +18,7 @@ resource "aws_db_instance" "mysql" {
 # # Creating the patameter group
 resource "aws_db_parameter_group" "mysql" {
   name   = "roboshop-mysql-${var.ENV}"
-  family = "mysql5.7"
+  family = "mysql${var.RDS_ENGINE_VERSION}"
 }
 
 # Creating Subnet Grou
